@@ -1,0 +1,24 @@
+dependencies:
+  - OpenZeppelin/openzeppelin-contracts@4.7.3
+  - smartcontractkit/chainlink-brownie-contracts@0.4.1
+compiler:
+  solc:
+    remappings:
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.7.3'
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@0.4.1'
+networks:
+  default: development
+  development:
+    verify: False
+  goerli:
+    eth_usd_price_feed: '0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e'
+    verify: True
+wallets:
+  from_key: ${PRIVATE_KEY}
+  from_key_test_1: ${PRIVATE_KEY_TEST_1}
+  from_key_test_2: ${PRIVATE_KEY_TEST_2}
+  from_key_test_3: ${PRIVATE_KEY_TEST_3}
+  from_key_test_4: ${PRIVATE_KEY_TEST_4}
+  from_key_test_5: ${PRIVATE_KEY_TEST_5}
+
+dotenv: .env

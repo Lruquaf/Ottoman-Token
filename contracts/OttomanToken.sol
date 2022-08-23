@@ -40,7 +40,7 @@ contract OttomanToken is ERC20, Ownable {
         return initialSupply * 10**18;
     }
 
-    function startMinting() public onlyOwner {
+    function startMinting() external onlyOwner {
         require(
             minting_state == MINTING_STATE.CLOSED,
             "Minting cannot be started anymore!"
@@ -48,13 +48,13 @@ contract OttomanToken is ERC20, Ownable {
         minting_state = MINTING_STATE.OPEN;
     }
 
-    function endMinting() public onlyOwner {
+    function endMinting() external onlyOwner {
         require(minting_state == MINTING_STATE.OPEN, "Minting is not open!");
         minting_state = MINTING_STATE.FINISHED;
         isAirdrop = airdropToken();
     }
 
-    function mintToken(uint256 _amount) public payable {
+    function mintToken(uint256 _amount) external payable {
         uint256 amount = _amount * 10**18;
         uint256 minimumUSD = amount * getTokenPrice();
         require(
@@ -76,7 +76,7 @@ contract OttomanToken is ERC20, Ownable {
         mintedTokens[msg.sender] += amount;
     }
 
-    function airdropToken() internal returns (bool) {
+    function airdropToken() private returns (bool) {
         require(
             minting_state == MINTING_STATE.FINISHED,
             "Minting is not over yet!"
@@ -101,7 +101,7 @@ contract OttomanToken is ERC20, Ownable {
         return costToBuy;
     }
 
-    function withdrawFunds() public payable onlyOwner {
+    function withdrawFunds() external payable onlyOwner {
         require(
             minting_state == MINTING_STATE.FINISHED,
             "You cannot withdraw funds yet!"

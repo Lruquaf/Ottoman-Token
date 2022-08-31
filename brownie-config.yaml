@@ -20,5 +20,4 @@ wallets:
   from_key_test_3: ${PRIVATE_KEY_TEST_3}
   from_key_test_4: ${PRIVATE_KEY_TEST_4}
   from_key_test_5: ${PRIVATE_KEY_TEST_5}
-
 dotenv: .env

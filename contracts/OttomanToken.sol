@@ -31,13 +31,13 @@ contract OttomanToken is ERC20, Ownable {
         ERC20("OttomanToken", "OTT")
     {
         priceFeed = AggregatorV3Interface(_priceFeedAddress);
-        initialSupply = _initialSupply;
+        initialSupply = _initialSupply * 10**18;
         minting_state = MINTING_STATE.CLOSED;
         usdTokenCost = 1 * 10**16;
     }
 
     function totalSupply() public view virtual override returns (uint256) {
-        return initialSupply * 10**18;
+        return initialSupply;
     }
 
     function startMinting() external onlyOwner {
@@ -77,12 +77,8 @@ contract OttomanToken is ERC20, Ownable {
     }
 
     function airdropToken() private returns (bool) {
-        require(
-            minting_state == MINTING_STATE.FINISHED,
-            "Minting is not over yet!"
-        );
         if (circulatingSupply != initialSupply) {
-            uint256 airdropPerOwner = (totalSupply() - circulatingSupply) /
+            uint256 airdropPerOwner = (initialSupply - circulatingSupply) /
                 ownersByMinting.length;
             for (uint256 i = 0; i < ownersByMinting.length; i++) {
                 _mint(ownersByMinting[i], airdropPerOwner);

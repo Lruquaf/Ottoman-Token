@@ -27,7 +27,6 @@ contract OttomanToken is ERC20, Ownable {
     MINTING_STATE public minting_state;
 
     constructor(uint256 _initialSupply, address _priceFeedAddress)
-        public
         ERC20("OttomanToken", "OTT")
     {
         priceFeed = AggregatorV3Interface(_priceFeedAddress);
